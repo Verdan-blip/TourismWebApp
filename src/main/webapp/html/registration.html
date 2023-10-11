@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="../css/auth.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Регистрация аккаунта</h1>
+    <form action="registration" method="post">
+
+      <input id="name" type="text" name="name" placeholder="Имя" required/>
+
+      <input id="lastname" type="text" name="lastname" placeholder="Фамилия" required/>
+
+      <select name="gender">
+        <option name="gender" value="m">Мужской</option>
+        <option name="gender" value="f">Женский</option>
+      </select>
+
+      <input id="phone" type="tel" name="phone" placeholder="Номер телефона" required/>
+
+      <input id="email" type="email" name="email" placeholder="Почта" required/>
+
+      <input id="password" type="password" name="password" placeholder="Пароль" required/>
+
+      <div>
+        <label for="remember_me">Запомнить меня</label>
+        <input type="checkbox" id="remember_me">
+      </div>
+
+      <input type="submit" value="Зарегистрироваться">
+
+    </form>
+  </div>
+</body>
+</html>
