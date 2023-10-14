@@ -3,36 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
-    <link rel="stylesheet" href="../css/auth.css" />
+    <link rel="stylesheet" href="../css/login.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Регистрация аккаунта</h1>
-    <form action="registration" method="post">
-
-      <input id="name" type="text" name="name" placeholder="Имя" required/>
-
-      <input id="lastname" type="text" name="lastname" placeholder="Фамилия" required/>
-
-      <select name="gender">
-        <option name="gender" value="m">Мужской</option>
-        <option name="gender" value="f">Женский</option>
-      </select>
-
-      <input id="phone" type="tel" name="phone" placeholder="Номер телефона" required/>
-
-      <input id="email" type="email" name="email" placeholder="Почта" required/>
-
-      <input id="password" type="password" name="password" placeholder="Пароль" required/>
-
-      <div>
-        <label for="remember_me">Запомнить меня</label>
-        <input type="checkbox" id="remember_me">
-      </div>
-
-      <input type="submit" value="Зарегистрироваться">
-
-    </form>
+<body>
+  <div class="container-background">
+    <div class="container">
+      <span class="container-title">Регистрация</span>
+      <form action="registration" method="post">
+        <input class="container-input" name="name" type="text" placeholder="Имя" required>
+        <input class="container-input" name="lastname" type="text" placeholder="Фамилия" required>
+        <select class="container-input" name="gender">
+          <option name="gender" value="m">Мужской</option>
+          <option name="gender" value="f">Женский</option>
+        </select>
+        <input class="container-input" type="tel" name="phone" placeholder="Номер телефона" required>
+        <input class="container-input" type="email" name="email" placeholder="Почта" required>
+        <input class="container-input" type="password" name="password" placeholder="Пароль" required>
+        <button class="container-submit" type="submit">Зарегистрироваться</button>
+      </form>
+    </div>
   </div>
+</body>
 </body>
 </html>

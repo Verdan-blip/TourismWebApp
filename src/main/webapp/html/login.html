@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="../css/auth.css" />
+    <link rel="stylesheet" href="../css/login.css" type="text/css">
 </head>
 <body>
-
-    <div class="container">
-        <h1>Авторизуйтесь</h1>
-        <form action="login" method="post">
-            <input id="email" name="email" type="email" placeholder="Почта" required/>
-            <input id="password" name="password" type="password" placeholder="Пароль" required/>
-            <div>
-                Ещё нет аккаунта?
-                <a href="registration">Зарегистрироваться!</a>
-            </div>
-            <input type="submit" value="Войти">
-        </form>
+    <div class="container-background">
+        <div class="container">
+            <span class="container-title">Войдите в свой аккаунт</span>
+            <form action="login" method="post">
+                <input class="container-input" type="email" name="email" placeholder="Почта" required>
+                <input class="container-input" type="password" name="password" placeholder="Пароль" required>
+                <div class="container-text">
+                    <label for="remember-me">Запомнить меня</label>
+                    <input id="remember-me" class="container-checkbox" type="checkbox">
+                </div>
+                <button class="container-submit" type="submit">Войти</button>
+            </form>
+        </div>
     </div>
-
 </body>
 </html>

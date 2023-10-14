@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.container-background {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/login_background.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: white;
+}
+
+.container {
+    background-color: white;
+    margin-top: 10%;
+    text-align: center;
+    padding: 24px 24px;
+    max-width: 20%;
+    width: max-content;
+    height: max-content;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25);
+    border-radius: 7px;
+}
+
+.container-title {
+    display: block;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.container-input {
+    background-color: #eee;
+    width: 100%;
+    margin-top: 16px;
+    padding: 12px 16px;
+    box-sizing: border-box;
+    border: none;
+}
+
+option {
+    padding: 12px 12px;
+    background-color: #eee;
+}
+
+.container-submit {
+    width: 50%;
+    margin-top: 16px;
+    padding: 12px 24px;
+    color: white;
+    border-radius: 7px;
+    border: none;
+}
+
+.container-text {
+    margin-top: 16px;
+}
+
+button {
+    transition: All 0.25s ease-in-out;
+    background: #01804d;
+}
+
+button:hover {
+    transition: All 0.25s ease-in-out;
+    background: #009a5c;
+}
