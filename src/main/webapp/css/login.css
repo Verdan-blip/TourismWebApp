@@ -22,11 +22,6 @@ body {
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-image: url("../img/login_background.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
     background-color: white;
 }
 
@@ -77,10 +72,10 @@ option {
 
 button {
     transition: All 0.25s ease-in-out;
-    background: #01804d;
+    background: #000000;
 }
 
 button:hover {
     transition: All 0.25s ease-in-out;
-    background: #009a5c;
+    background: #252525;
 }

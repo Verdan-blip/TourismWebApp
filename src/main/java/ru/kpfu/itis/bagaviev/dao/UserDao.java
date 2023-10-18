@@ -15,7 +15,8 @@ public class UserDao implements Dao<User> {
     private static final int COLUMN_GENDER = 4;
     private static final int COLUMN_PHONE = 5;
     private static final int COLUMN_EMAIL = 6;
-    private static final int COLUMN_PASSWORD = 7;
+    private static final int COLUMN_AVATAR = 7;
+    private static final int COLUMN_PASSWORD = 8;
 
     private final Connection connection = DatabaseConnectionUtil.getConnection();
 
@@ -27,7 +28,8 @@ public class UserDao implements Dao<User> {
                 resultSet.getString(COLUMN_GENDER),
                 resultSet.getString(COLUMN_PHONE),
                 resultSet.getString(COLUMN_EMAIL),
-                resultSet.getString(COLUMN_PASSWORD)
+                resultSet.getString(COLUMN_PASSWORD),
+                resultSet.getString(COLUMN_AVATAR)
         );
     }
     @Override
@@ -35,7 +37,24 @@ public class UserDao implements Dao<User> {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM users WHERE users.id = '%d'", id));
-            return getUserFromResultSet(resultSet);
+            if (resultSet.next())
+                return getUserFromResultSet(resultSet);
+            else
+                return null;
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    public User get(String email, String password) {
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(String.format(
+                    "SELECT * FROM users WHERE users.email = '%s' AND users.password = '%s'", email, password));
+            if (resultSet.next())
+                return getUserFromResultSet(resultSet);
+            else
+                return null;
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
@@ -47,10 +66,8 @@ public class UserDao implements Dao<User> {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
             List<User> users = new ArrayList<>();
-            if (resultSet != null) {
-                while (resultSet.next()) {
-                    users.add(getUserFromResultSet(resultSet));
-                }
+            while (resultSet.next()) {
+                users.add(getUserFromResultSet(resultSet));
             }
             return users;
         } catch (SQLException exception) {
@@ -60,26 +77,35 @@ public class UserDao implements Dao<User> {
 
     @Override
     public void save(User user) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("insert into users (name, lastname, gender, phone, email, password) values (?, ?, ?, ?, ?, ?);");
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getLastname());
-            statement.setString(3, user.getPhone());
-            statement.setString(4, user.getGender());
-            statement.setString(5, user.getEmail());
-            statement.setString(6, user.getPassword());
-            statement.executeUpdate();
+        String query = "INSERT INTO users (name, lastname, gender, phone, email, password, avatar) VALUES (?, ?, ?, ?, ?, ?, ?);";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getLastname());
+            preparedStatement.setString(3, user.getPhone());
+            preparedStatement.setString(4, user.getGender());
+            preparedStatement.setString(5, user.getEmail());
+            preparedStatement.setString(6, user.getPassword());
+            preparedStatement.setString(7, user.getAvatar());
+            preparedStatement.executeUpdate();
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
     }
 
-    public boolean isExists(String email, String password) {
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM users WHERE users.email = '%s'", email));
-            if (resultSet.next()) return (resultSet.getString("password").equals(password));
-            return false;
+    @Override
+    public void update(User user) {
+        String query = "UPDATE users " +
+                "SET name = ?, lastname = ?, gender = ?, phone = ?, email = ?, avatar = ? " +
+                "WHERE users.id = ?";
+        try (PreparedStatement preparedStatement = DatabaseConnectionUtil.getConnection().prepareStatement(query)) {
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getLastname());
+            preparedStatement.setString(3, user.getGender());
+            preparedStatement.setString(4, user.getPhone());
+            preparedStatement.setString(5, user.getEmail());
+            preparedStatement.setString(6, user.getAvatar());
+            preparedStatement.setInt(7, user.getId());
+            preparedStatement.execute();
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

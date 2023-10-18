@@ -1,35 +1,31 @@
-package ru.kpfu.itis.bagaviev.model;
+package ru.kpfu.itis.bagaviev.dto;
 
-import java.nio.file.Paths;
+public class OrderUserDto {
 
-public class User {
     private int id;
     private String name;
     private String lastname;
     private String gender;
     private String phone;
     private String email;
-    private String password;
+
     private String avatar;
 
-    public User(int id, String name, String lastname, String gender, String phone, String email, String avatar, String password) {
+    public OrderUserDto(int id, String name, String lastname, String gender, String phone, String email, String avatar) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.gender = gender;
         this.phone = phone;
         this.email = email;
-        this.password = password;
         this.avatar = avatar;
     }
 
-    public User(String name, String lastname, String gender, String phone, String email, String avatar, String password) {
-        this.name = name;
-        this.lastname = lastname;
-        this.gender = gender;
-        this.phone = phone;
-        this.email = email;
-        this.password = password;
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
@@ -81,19 +77,4 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
 }

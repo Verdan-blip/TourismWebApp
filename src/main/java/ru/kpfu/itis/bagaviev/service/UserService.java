@@ -1,6 +1,7 @@
 package ru.kpfu.itis.bagaviev.service;
 
 import ru.kpfu.itis.bagaviev.dao.UserDao;
+import ru.kpfu.itis.bagaviev.dto.OrderUserDto;
 import ru.kpfu.itis.bagaviev.dto.UserDto;
 import ru.kpfu.itis.bagaviev.model.User;
 import ru.kpfu.itis.bagaviev.utils.PasswordEncryptUtil;
@@ -11,15 +12,43 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserDao userDao = new UserDao();
-    public List<UserDto> getAll() {
-        return userDao.getAll()
+
+    private UserDto userToUserDto(User user) {
+        if (user == null) return null;
+        return new UserDto(
+                    user.getName(),
+                    user.getLastname(),
+                    user.getGender(),
+                    user.getPhone(),
+                    user.getEmail(),
+                    user.getAvatar());
+    }
+
+    private OrderUserDto userToOrderUserDto(User user) {
+        if (user == null) return null;
+        return new OrderUserDto(
+                user.getId(),
+                user.getName(),
+                user.getLastname(),
+                user.getGender(),
+                user.getPhone(),
+                user.getAvatar(),
+                user.getEmail());
+    }
+
+    public List<OrderUserDto> getAll() {
+        return userDao
+                .getAll()
                 .stream()
-                .map(dao -> new UserDto(dao.getName(), dao.getLastname()))
+                .map(this::userToOrderUserDto)
                 .collect(Collectors.toList());
     }
-    public UserDto get(int id) {
-        User user = userDao.get(id);
-        return new UserDto(user.getName(), user.getLastname());
+    public User get(int id) {
+        return userDao.get(id);
+    }
+
+    public User get(String email, String password) {
+        return userDao.get(email, PasswordEncryptUtil.encrypt(password));
     }
 
     public void save(User user) {
@@ -27,8 +56,8 @@ public class UserService {
         userDao.save(user);
     }
 
-    public boolean isExist(String email, String password) {
-        return userDao.isExists(email, PasswordEncryptUtil.encrypt(password));
+    public void update(User user) {
+        userDao.update(user);
     }
 
 }

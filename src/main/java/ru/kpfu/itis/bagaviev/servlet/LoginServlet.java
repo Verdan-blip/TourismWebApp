@@ -1,5 +1,8 @@
 package ru.kpfu.itis.bagaviev.servlet;
 
+import ru.kpfu.itis.bagaviev.dto.OrderUserDto;
+import ru.kpfu.itis.bagaviev.dto.UserDto;
+import ru.kpfu.itis.bagaviev.model.User;
 import ru.kpfu.itis.bagaviev.service.UserService;
 
 import javax.servlet.ServletException;
@@ -24,17 +27,20 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String email = req.getParameter(PARAM_NAME_EMAIL);
         String password = req.getParameter(PARAM_NAME_PASSWORD);
 
         UserService service = new UserService();
-        if (service.isExist(email, password)) {
-            HttpSession session = req.getSession();
-            session.setMaxInactiveInterval(MAX_INACTIVE_INTERVAL);
-            session.setAttribute(PARAM_NAME_EMAIL, email);
-            resp.sendRedirect("/profile");
+        User user = service.get(email, password);
+
+        if (user == null) {
+            resp.sendRedirect("/login");
         } else {
-            doGet(req, resp);
+            HttpSession session = req.getSession();
+            session.setAttribute("user", user);
+            session.setMaxInactiveInterval(MAX_INACTIVE_INTERVAL);
+            resp.sendRedirect("/profile");
         }
     }
 
