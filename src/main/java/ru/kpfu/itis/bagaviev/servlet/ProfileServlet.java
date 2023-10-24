@@ -1,9 +1,6 @@
 package ru.kpfu.itis.bagaviev.servlet;
 
-import ru.kpfu.itis.bagaviev.dao.UserDao;
-import ru.kpfu.itis.bagaviev.dto.OrderUserDto;
 import ru.kpfu.itis.bagaviev.model.User;
-import ru.kpfu.itis.bagaviev.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

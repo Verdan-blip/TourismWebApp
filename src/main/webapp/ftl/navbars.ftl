@@ -3,7 +3,7 @@
 
 <#macro navbars user>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Young Traveller</a>
+        <a class="navbar-brand" style="padding-left: 8px;" href="#">Young Traveller</a>
         <#if user??>
             <@profile.nav_item_profile />
             <#else>

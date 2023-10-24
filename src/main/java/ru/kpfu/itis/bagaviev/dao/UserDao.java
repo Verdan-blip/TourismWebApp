@@ -33,7 +33,7 @@ public class UserDao implements Dao<User> {
         );
     }
     @Override
-    public User get(int id) {
+    public User get(Integer id) {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM users WHERE users.id = '%d'", id));

@@ -1,43 +1,42 @@
 package ru.kpfu.itis.bagaviev.servlet;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import ru.kpfu.itis.bagaviev.dao.HotelDao;
+import ru.kpfu.itis.bagaviev.model.Hotel;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
+import java.util.List;
+import java.util.Map;
 
-@WebServlet(name = "searchHotelsServlet", urlPatterns = "/search/patterns")
+@WebServlet(name = "searchHotelsServlet", urlPatterns = "/search")
 public class SearchHotelsServlet extends HttpServlet {
-
-    private final String queryFormat = "http://engine.hotellook.com/api/v2/lookup.json?query=%s&lang=ru&lookFor=hotels";
-    private final String SCHEME = "http";
-    private final String HOST = "engine.hotellook.com";
-    private final int PORT = 1234;
-    private final String PATH = "/api/v2/lookup.json";
-    private final String QUERY_FORMAT = "query=%s";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String city = req.getParameter("city");
-        String query = String.format(QUERY_FORMAT, city);
-        try {
-            URL url = new URI(SCHEME, null, HOST, PORT, PATH, query, null).toURL();
-            try {
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.setRequestProperty("Content-Type", "application/json");
-                connection.setDoOutput(true);
-            } catch (Exception exception) {
-                throw new ServletException(exception);
-            }
-        } catch (Exception exception) {
-            throw new ServletException(exception);
-        }
+        resp.setContentType("text/plain");
+        resp.setCharacterEncoding("UTF-8");
 
+        String city = req.getParameter("city");
+        HotelDao hotelDao = new HotelDao();
+        List<Hotel> hotels = hotelDao.get(city);
+        JSONArray hotelsJsonArray = new JSONArray();
+        for (Hotel hotel : hotels) {
+            hotelsJsonArray.add(new JSONObject(
+                    Map.of("name", hotel.getName(),
+                            "city", hotel.getCity(),
+                            "location", hotel.getLocation(),
+                            "image", hotel.getImageUrl(),
+                            "star_rating", hotel.getStarRating(),
+                            "price_per_night", hotel.getPricePerNight())
+            ));
+        }
+        resp.getWriter().print(hotelsJsonArray.toJSONString());
     }
 
 }

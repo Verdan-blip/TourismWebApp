@@ -1,7 +1,5 @@
 package ru.kpfu.itis.bagaviev.servlet;
 
-import ru.kpfu.itis.bagaviev.dto.OrderUserDto;
-import ru.kpfu.itis.bagaviev.dto.UserDto;
 import ru.kpfu.itis.bagaviev.model.User;
 import ru.kpfu.itis.bagaviev.service.UserService;
 

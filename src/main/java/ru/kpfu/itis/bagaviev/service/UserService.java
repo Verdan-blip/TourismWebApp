@@ -1,7 +1,6 @@
 package ru.kpfu.itis.bagaviev.service;
 
 import ru.kpfu.itis.bagaviev.dao.UserDao;
-import ru.kpfu.itis.bagaviev.dto.OrderUserDto;
 import ru.kpfu.itis.bagaviev.dto.UserDto;
 import ru.kpfu.itis.bagaviev.model.User;
 import ru.kpfu.itis.bagaviev.utils.PasswordEncryptUtil;
@@ -16,17 +15,6 @@ public class UserService {
     private UserDto userToUserDto(User user) {
         if (user == null) return null;
         return new UserDto(
-                    user.getName(),
-                    user.getLastname(),
-                    user.getGender(),
-                    user.getPhone(),
-                    user.getEmail(),
-                    user.getAvatar());
-    }
-
-    private OrderUserDto userToOrderUserDto(User user) {
-        if (user == null) return null;
-        return new OrderUserDto(
                 user.getId(),
                 user.getName(),
                 user.getLastname(),
@@ -36,11 +24,11 @@ public class UserService {
                 user.getEmail());
     }
 
-    public List<OrderUserDto> getAll() {
+    public List<UserDto> getAll() {
         return userDao
                 .getAll()
                 .stream()
-                .map(this::userToOrderUserDto)
+                .map(this::userToUserDto)
                 .collect(Collectors.toList());
     }
     public User get(int id) {

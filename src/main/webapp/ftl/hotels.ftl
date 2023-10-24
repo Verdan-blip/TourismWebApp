@@ -19,7 +19,8 @@
         <button id="search-button" type="button" class="btn btn-outline-primary">Найти отели</button>
     </div>
 
-    <div id="search-result"></div>
+    <div id="search-result">
+    </div>
 
     <script type="text/javascript" src="../js/get_hostels.js"></script>
 

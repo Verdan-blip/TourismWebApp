@@ -15,12 +15,10 @@ public class HotelsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
 
         req.setAttribute("user", user);
-
         req.getRequestDispatcher("ftl/hotels.ftl").forward(req, resp);
     }
 
