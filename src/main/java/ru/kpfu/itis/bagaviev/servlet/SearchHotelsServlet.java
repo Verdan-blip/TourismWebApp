@@ -20,12 +20,12 @@ public class SearchHotelsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/plain");
-        resp.setCharacterEncoding("UTF-8");
 
         String city = req.getParameter("city");
         HotelDao hotelDao = new HotelDao();
         List<Hotel> hotels = hotelDao.get(city);
         JSONArray hotelsJsonArray = new JSONArray();
+
         for (Hotel hotel : hotels) {
             hotelsJsonArray.add(new JSONObject(
                     Map.of("name", hotel.getName(),

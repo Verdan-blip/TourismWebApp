@@ -1,6 +1,8 @@
 package ru.kpfu.itis.bagaviev.servlet;
 
+import ru.kpfu.itis.bagaviev.dto.UserDto;
 import ru.kpfu.itis.bagaviev.model.User;
+import ru.kpfu.itis.bagaviev.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +18,11 @@ public class ProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-        User user = (User) (session.getAttribute("user"));
+        Integer userId = (Integer) (session.getAttribute("userId"));
+        UserService service = new UserService();
+        UserDto userDto = service.get(userId);
 
-        req.setAttribute("user", user);
-
+        req.setAttribute("user", userDto);
         req.getRequestDispatcher("ftl/profile.ftl").forward(req, resp);
     }
 

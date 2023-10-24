@@ -1,5 +1,6 @@
 package ru.kpfu.itis.bagaviev.servlet;
 
+import org.json.simple.JSONObject;
 import ru.kpfu.itis.bagaviev.model.User;
 import ru.kpfu.itis.bagaviev.service.UserService;
 
@@ -8,12 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.util.Map;
 
-@WebServlet(name = "registrationServlet", urlPatterns = "/registration")
-public class RegistrationServlet extends HttpServlet {
+@WebServlet(name = "registrationServlet", urlPatterns = "/register")
+public class RegisterServlet extends HttpServlet {
 
     private static final String DEFAULT_USER_AVATAR_URL = "https://www.mfp-law.com/wp-content/uploads/2021/06/Platzhalter-j.bunz_.jpg";
 
@@ -31,22 +31,36 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/plain");
 
         UserService service = new UserService();
-        User user = new User(
-                req.getParameter(PARAM_NAME_NAME),
-                req.getParameter(PARAM_NAME_LASTNAME),
-                req.getParameter(PARAM_NAME_PHONE),
-                req.getParameter(PARAM_NAME_GENDER),
-                req.getParameter(PARAM_NAME_EMAIL),
-                DEFAULT_USER_AVATAR_URL,
-                req.getParameter(PARAM_NAME_PASSWORD));
 
-        service.save(user);
+        String email = req.getParameter(PARAM_NAME_EMAIL);
+        String phone = req.getParameter(PARAM_NAME_PHONE);
 
-        HttpSession session = req.getSession();
-        session.setAttribute("user", user);
+        boolean phoneExists = service.existsPhone(phone);
+        boolean emailExists = service.existsEmail(email);
 
+        JSONObject jsonObject = new JSONObject(Map.of(
+                "phone_exists", phoneExists,
+                "email_exists", emailExists
+        ));
+
+        if (!phoneExists && !emailExists) {
+            User user = new User(
+                    req.getParameter(PARAM_NAME_NAME),
+                    req.getParameter(PARAM_NAME_LASTNAME),
+                    phone,
+                    req.getParameter(PARAM_NAME_GENDER),
+                    email,
+                    DEFAULT_USER_AVATAR_URL,
+                    req.getParameter(PARAM_NAME_PASSWORD));
+            service.save(user);
+            jsonObject.put("status", "success");
+        } else {
+            jsonObject.put("status", "failure");
+        }
+        resp.getWriter().print(jsonObject.toJSONString());
     }
 
 }

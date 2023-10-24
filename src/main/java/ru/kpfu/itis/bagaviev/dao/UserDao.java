@@ -1,11 +1,15 @@
 package ru.kpfu.itis.bagaviev.dao;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import ru.kpfu.itis.bagaviev.model.User;
 import ru.kpfu.itis.bagaviev.utils.DatabaseConnectionUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserDao implements Dao<User> {
 
@@ -34,9 +38,10 @@ public class UserDao implements Dao<User> {
     }
     @Override
     public User get(Integer id) {
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM users WHERE users.id = '%d'", id));
+        String query = "SELECT * FROM users WHERE users.id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next())
                 return getUserFromResultSet(resultSet);
             else
@@ -47,10 +52,11 @@ public class UserDao implements Dao<User> {
     }
 
     public User get(String email, String password) {
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(String.format(
-                    "SELECT * FROM users WHERE users.email = '%s' AND users.password = '%s'", email, password));
+        String query = "SELECT * FROM users WHERE users.email = ? AND users.password = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next())
                 return getUserFromResultSet(resultSet);
             else
@@ -106,6 +112,28 @@ public class UserDao implements Dao<User> {
             preparedStatement.setString(6, user.getAvatar());
             preparedStatement.setInt(7, user.getId());
             preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    public boolean existsPhone(String phone) {
+        String query = "SELECT * FROM users WHERE users.phone = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, phone);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return (resultSet.next());
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    public boolean existsEmail(String email) {
+        String query = "SELECT * FROM users WHERE users.email = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return (resultSet.next());
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

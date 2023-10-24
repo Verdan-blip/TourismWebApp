@@ -10,6 +10,7 @@
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
+    <link href = "../css/button-style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -23,9 +24,9 @@
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <img class="rounded-circle mt-5" width="150px" height="150px" id="avatar" src="${user.getAvatar()}">
                     <br>
-                    <input class="btn btn-primary profile-button" type="file" name="file"/>
+                    <input class="button-black" type="file" name="file"/>
                     <br>
-                    <input class="btn btn-primary profile-button" type="submit" name="submit" value="Загрузить аватарку"/>
+                    <input class="button-black" type="submit" name="submit" value="Загрузить аватарку"/>
                 </div>
             </div>
 
@@ -46,10 +47,6 @@
                 <div class="col-md-12">
                     <label for="email" class="labels">Почта:</label>
                     <input id="email" type="email" class="form-control" placeholder="${user.getEmail()}" disabled>
-                </div>
-                <div class="col-md-12">
-                    <label for="country" class="labels">Город:</label>
-                    <input id="country" type="email" class="form-control" placeholder="Undefined" disabled>
                 </div>
             </div>
 

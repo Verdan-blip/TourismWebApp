@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
-    <link rel="stylesheet" href="../css/login.css" />
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="../css/form.css" />
 </head>
 <body>
   <div class="container-background">
     <div class="container">
       <span class="container-title">Регистрация</span>
-      <form action="registration" method="post">
-        <input class="container-input" name="name" type="text" placeholder="Имя" required>
-        <input class="container-input" name="lastname" type="text" placeholder="Фамилия" required>
-        <select class="container-input" name="gender">
+      <form>
+        <input id="name" class="container-input" name="name" type="text" placeholder="Имя" required>
+        <input id="lastname" class="container-input" name="lastname" type="text" placeholder="Фамилия" required>
+        <select id="gender" class="container-input" name="gender">
           <option name="gender" value="m">Мужской</option>
           <option name="gender" value="f">Женский</option>
         </select>
-        <input class="container-input" type="tel" name="phone" placeholder="Номер телефона" required>
-        <input class="container-input" type="email" name="email" placeholder="Почта" required>
-        <input class="container-input" type="password" name="password" placeholder="Пароль" required>
-        <button class="container-submit" type="submit">Зарегистрироваться</button>
+        <input id="phone" class="container-input" type="tel" name="phone" placeholder="Номер телефона" required>
+        <span id="container-log-phone" class="container-log"></span>
+        <input id="email" class="container-input" type="email" name="email" placeholder="Почта" required>
+        <span id="container-log-email" class="container-log"></span>
+        <input id="password" class="container-input" type="password" name="password" placeholder="Пароль" required>
+        <button id="register-button" class="container-submit" type="button">Зарегистрироваться</button>
       </form>
     </div>
   </div>
+  <script src="../js/registration.js" type="text/javascript"></script>
 </body>
 </html>

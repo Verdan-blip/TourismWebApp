@@ -5,7 +5,7 @@
                 <a class="nav-link" href="login">Войти</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="registration">Зарегистрироваться</a>
+                <a class="nav-link" href="register">Зарегистрироваться</a>
             </li>
         </ul>
     </div>

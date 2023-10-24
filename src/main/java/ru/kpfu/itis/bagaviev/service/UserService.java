@@ -5,6 +5,9 @@ import ru.kpfu.itis.bagaviev.dto.UserDto;
 import ru.kpfu.itis.bagaviev.model.User;
 import ru.kpfu.itis.bagaviev.utils.PasswordEncryptUtil;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +23,8 @@ public class UserService {
                 user.getLastname(),
                 user.getGender(),
                 user.getPhone(),
-                user.getAvatar(),
-                user.getEmail());
+                user.getEmail(),
+                user.getAvatar());
     }
 
     public List<UserDto> getAll() {
@@ -31,12 +34,14 @@ public class UserService {
                 .map(this::userToUserDto)
                 .collect(Collectors.toList());
     }
-    public User get(int id) {
-        return userDao.get(id);
+    public UserDto get(Integer id) {
+        return userToUserDto(userDao.get(id));
     }
 
-    public User get(String email, String password) {
-        return userDao.get(email, PasswordEncryptUtil.encrypt(password));
+    public UserDto get(String email, String password) {
+        return userToUserDto(
+                userDao.get(email, PasswordEncryptUtil.encrypt(password))
+        );
     }
 
     public void save(User user) {
@@ -46,6 +51,14 @@ public class UserService {
 
     public void update(User user) {
         userDao.update(user);
+    }
+
+    public boolean existsPhone(String phone) {
+        return userDao.existsPhone(phone);
+    }
+
+    public boolean existsEmail(String email) {
+        return userDao.existsEmail(email);
     }
 
 }

@@ -2,7 +2,9 @@ package ru.kpfu.itis.bagaviev.servlet;
 
 import com.cloudinary.Cloudinary;
 import ru.kpfu.itis.bagaviev.dao.UserDao;
+import ru.kpfu.itis.bagaviev.dto.UserDto;
 import ru.kpfu.itis.bagaviev.model.User;
+import ru.kpfu.itis.bagaviev.service.UserService;
 import ru.kpfu.itis.bagaviev.utils.CloudinaryUtil;
 
 import javax.servlet.ServletException;
@@ -49,12 +51,14 @@ public class FileUploadingServlet extends HttpServlet {
         Map map = cloudinary.uploader().upload(file, null);
 
         HttpSession session = req.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
+
         UserDao userDao = new UserDao();
-        User user = (User) session.getAttribute("user");
+        User user = userDao.get(userId);
 
         String url = (String) map.get("url");
-        user.setAvatar(url);
 
+        user.setAvatar(url);
         userDao.update(user);
 
         resp.sendRedirect("/profile");
