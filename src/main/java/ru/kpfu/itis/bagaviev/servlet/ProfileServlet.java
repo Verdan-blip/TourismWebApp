@@ -16,13 +16,6 @@ import java.io.IOException;
 public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        HttpSession session = req.getSession();
-        Integer userId = (Integer) (session.getAttribute("userId"));
-        UserService service = new UserService();
-        UserDto userDto = service.get(userId);
-
-        req.setAttribute("user", userDto);
         req.getRequestDispatcher("ftl/profile.ftl").forward(req, resp);
     }
 

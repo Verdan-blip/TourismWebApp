@@ -19,10 +19,21 @@
         <button id="search-button" type="button" class="btn btn-outline-primary">Найти отели</button>
     </div>
 
-    <div id="search-result">
+    <div class="row" style="margin-bottom: 8px;">
+        <div class="col-md-auto">
+            <label for="filter-by-price" style="margin: 8px 8px;">Фильтровать по</label>
+            <select id="filter-by-price" class="form-select">
+                <option disabled selected>Выберите</option>
+                <option value="by-ascending">По возрастанию</option>
+                <option value="by-descending">По убыванию</option>
+                <option value="by-rating">По рейтингу</option>
+            </select>
+        </div>
     </div>
 
-    <script type="text/javascript" src="../js/get_hostels.js"></script>
+    <div id="search-result"></div>
+
+    <script type="text/javascript" src="../js/get_hotels.js"></script>
 
 </body>
 </html>

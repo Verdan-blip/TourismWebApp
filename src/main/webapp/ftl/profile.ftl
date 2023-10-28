@@ -22,7 +22,7 @@
 
             <div class="mt-5 text-center">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class="rounded-circle mt-5" width="150px" height="150px" id="avatar" src="${user.getAvatar()}">
+                    <img class="rounded-circle mt-5" width="150px" height="150px" id="avatar" src="${user.avatar}">
                     <br>
                     <input class="button-black" type="file" name="file"/>
                     <br>
@@ -33,20 +33,20 @@
             <div class="row mt-2">
                 <div class="col-md-6">
                     <label for="name">Имя:</label>
-                    <input id="name" class="form-control" placeholder="${user.getName()}" disabled></div>
+                    <input id="name" class="form-control" placeholder="${user.name}" disabled></div>
                 <div class="col-md-6">
                     <label for="lastname">Фамилия:</label>
-                    <input id="lastname" class="form-control" placeholder="${user.getLastname()}" disabled></div>
+                    <input id="lastname" class="form-control" placeholder="${user.lastname}" disabled></div>
             </div>
 
             <div class="row mt-3">
                 <div class="col-md-12">
                     <label for="phone" class="labels">Контактный телефон:</label>
-                    <input id="phone" type="tel" class="form-control" placeholder="${user.getPhone()}" disabled>
+                    <input id="phone" type="tel" class="form-control" placeholder="${user.phone}" disabled>
                 </div>
                 <div class="col-md-12">
                     <label for="email" class="labels">Почта:</label>
-                    <input id="email" type="email" class="form-control" placeholder="${user.getEmail()}" disabled>
+                    <input id="email" type="email" class="form-control" placeholder="${user.email}" disabled>
                 </div>
             </div>
 

@@ -20,6 +20,7 @@ public class SearchHotelsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/plain");
+        resp.setCharacterEncoding("UTF-8");
 
         String city = req.getParameter("city");
         HotelDao hotelDao = new HotelDao();
