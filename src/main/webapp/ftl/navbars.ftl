@@ -7,14 +7,16 @@
         <#if user == 'not-authorized'>
             <@log_or_reg.nav_item_log_or_reg />
             <#else>
-                <@profile.nav_item_profile />
+                <@profile.nav_item_profile user />
         </#if>
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="news">Новости</a></li>
+                <li class="nav-item active"><a class="nav-link" href="places">Туристические места</a></li>
                 <li class="nav-item active"><a class="nav-link" href="hotels">Отели</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Найти людей</a></li>
+                <li class="nav-item"><a class="nav-link" href="users">Найти людей</a></li>
                 <li class="nav-item"><a class="nav-link" href="reviews">Отзывы о сайте</a></li>
             </ul>
         </div>

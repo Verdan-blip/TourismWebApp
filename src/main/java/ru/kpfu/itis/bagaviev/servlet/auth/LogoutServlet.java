@@ -1,4 +1,4 @@
-package ru.kpfu.itis.bagaviev.servlet;
+package ru.kpfu.itis.bagaviev.servlet.auth;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

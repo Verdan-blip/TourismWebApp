@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
+    <title>Reviews</title>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -13,6 +13,7 @@
     <link href="../css/button-style.css" rel="stylesheet">
 </head>
 <body>
+
     <@navbars.navbars user></@navbars.navbars>
 
     <div class="row d-flex justify-content-center" style="margin-top: 32px">

@@ -1,4 +1,4 @@
-package ru.kpfu.itis.bagaviev.servlet;
+package ru.kpfu.itis.bagaviev.servlet.hotels;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,8 +14,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "searchHotelsServlet", urlPatterns = "/search")
-public class SearchHotelsServlet extends HttpServlet {
+@WebServlet(name = "hotelsServlet", urlPatterns = "/hotels")
+public class HotelsServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("ftl/hotels.ftl").forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,7 +34,8 @@ public class SearchHotelsServlet extends HttpServlet {
 
         for (Hotel hotel : hotels) {
             hotelsJsonArray.add(new JSONObject(
-                    Map.of("name", hotel.getName(),
+                    Map.of("id", hotel.getId(),
+                            "name", hotel.getName(),
                             "city", hotel.getCity(),
                             "location", hotel.getLocation(),
                             "image", hotel.getImageUrl(),

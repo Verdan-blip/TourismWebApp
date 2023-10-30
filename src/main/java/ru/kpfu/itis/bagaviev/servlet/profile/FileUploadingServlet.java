@@ -1,4 +1,4 @@
-package ru.kpfu.itis.bagaviev.servlet;
+package ru.kpfu.itis.bagaviev.servlet.profile;
 
 import com.cloudinary.Cloudinary;
 import ru.kpfu.itis.bagaviev.dao.UserDao;

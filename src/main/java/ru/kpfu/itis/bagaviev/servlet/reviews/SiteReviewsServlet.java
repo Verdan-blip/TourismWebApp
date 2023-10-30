@@ -1,4 +1,4 @@
-package ru.kpfu.itis.bagaviev.servlet;
+package ru.kpfu.itis.bagaviev.servlet.reviews;
 
 import ru.kpfu.itis.bagaviev.dto.SiteReviewDto;
 import ru.kpfu.itis.bagaviev.model.SiteReview;

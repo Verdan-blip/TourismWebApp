@@ -1,7 +1,16 @@
+const inputName = $('#name')
+const inputLastname = $('#lastname')
 const inputPhone = $('#phone')
 const inputEmail = $('#email')
 const logPhone = $('#container-log-phone')
 const logEmail = $('#container-log-email')
+
+function onKeyDown(e) {
+    if (e.key.match(/[0-9]/)) {
+        return e.preventDefault();
+    }
+}
+
 $('#register-button').click(function () {
     $.ajax({
         url: "register",
@@ -36,4 +45,16 @@ inputPhone.change(function () {
 
 inputEmail.change(function () {
     logEmail.html('')
+})
+
+inputName.on('keydown', function(e) {
+    if (e.key.match(/[0-9]/)) {
+        return e.preventDefault();
+    }
+})
+
+inputLastname.on('keydown', function(e) {
+    if (e.key.match(/[0-9]/)) {
+        return e.preventDefault();
+    }
 })

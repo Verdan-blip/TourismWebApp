@@ -23,7 +23,7 @@ public class SiteReviewDao implements Dao<SiteReview> {
 
     @Override
     public SiteReview get(Integer id) {
-        String query = "SELECT * FROM site_reviews WHERE site_reviews.id = ?";
+        String query = "SELECT * FROM site_reviews WHERE site_reviews.id = ?;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -35,7 +35,7 @@ public class SiteReviewDao implements Dao<SiteReview> {
 
     @Override
     public List<SiteReview> getAll() {
-        String query = "SELECT * FROM site_reviews";
+        String query = "SELECT * FROM site_reviews;";
         List<SiteReview> siteReviews = new ArrayList<>();
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
@@ -50,7 +50,7 @@ public class SiteReviewDao implements Dao<SiteReview> {
 
     @Override
     public void save(SiteReview siteReview) {
-        String query = "INSERT INTO site_reviews (user_id, date, text, star_rate) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO site_reviews (user_id, date, text, star_rate) VALUES (?, ?, ?, ?);";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, siteReview.getUserId());
             preparedStatement.setDate(2, siteReview.getDate());
@@ -66,7 +66,7 @@ public class SiteReviewDao implements Dao<SiteReview> {
     public void update(SiteReview siteReview) {
         String query = "UPDATE site_reviews " +
                 "SET user_id = ?, date = ?, text = ?, star_rate = ? " +
-                "WHERE site_reviews.id = ?";
+                "WHERE site_reviews.id = ?;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, siteReview.getId());
             preparedStatement.setDate(2, siteReview.getDate());

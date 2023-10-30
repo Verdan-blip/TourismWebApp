@@ -1,4 +1,4 @@
-package ru.kpfu.itis.bagaviev.servlet;
+package ru.kpfu.itis.bagaviev.servlet.auth;
 
 import org.json.simple.JSONObject;
 import ru.kpfu.itis.bagaviev.dto.UserDto;

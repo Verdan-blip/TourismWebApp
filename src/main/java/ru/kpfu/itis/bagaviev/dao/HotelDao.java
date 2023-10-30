@@ -9,29 +9,19 @@ import java.util.List;
 
 public class HotelDao implements Dao<Hotel> {
 
-    private static final int COLUMN_ID = 1;
-    private static final int COLUMN_NAME = 2;
-    private static final int COLUMN_LOCATION = 3;
-    private static final int COLUMN_DESCRIPTION = 4;
-    private static final int COLUMN_IMAGE = 5;
-    private static final int COLUMN_RATE = 6;
-    private static final int COLUMN_PRICE_PER_NIGHT = 7;
-    private static final int COLUMN_STAR_RATING = 8;
-    private static final int COLUMN_CITY = 9;
-
     private final Connection connection = DatabaseConnectionUtil.getConnection();
 
     private Hotel getHotelFromResultSet(ResultSet resultSet) throws SQLException {
         return new Hotel(
-                resultSet.getInt(COLUMN_ID),
-                resultSet.getString(COLUMN_NAME),
-                resultSet.getString(COLUMN_LOCATION),
-                resultSet.getString(COLUMN_DESCRIPTION),
-                resultSet.getString(COLUMN_IMAGE),
-                resultSet.getShort(COLUMN_RATE),
-                resultSet.getDouble(COLUMN_PRICE_PER_NIGHT),
-                resultSet.getShort(COLUMN_STAR_RATING),
-                resultSet.getString(COLUMN_CITY)
+                resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getString(3),
+                resultSet.getString(4),
+                resultSet.getString(5),
+                resultSet.getShort(6),
+                resultSet.getDouble(7),
+                resultSet.getShort(8),
+                resultSet.getString(9)
         );
     }
     @Override

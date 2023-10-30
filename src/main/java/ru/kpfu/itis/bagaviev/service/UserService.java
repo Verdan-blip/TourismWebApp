@@ -44,6 +44,14 @@ public class UserService {
         );
     }
 
+    public List<UserDto> getByName(String name) {
+        return userDao
+                .getByName(name)
+                .stream()
+                .map(this::userToUserDto)
+                .collect(Collectors.toList());
+    }
+
     public void save(User user) {
         user.setPassword(PasswordEncryptUtil.encrypt(user.getPassword()));
         userDao.save(user);
