@@ -20,7 +20,20 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("html/login.html").forward(req, resp);
+        Integer userId = null;
+        Cookie[] cookies = req.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("userId")) {
+                if (cookie.getValue() != null) {
+                    userId = Integer.parseInt(cookie.getValue());
+                }
+            }
+        }
+        if (userId != null) {
+            resp.sendRedirect("/profile");
+        } else {
+            req.getRequestDispatcher("html/login.html").forward(req, resp);
+        }
     }
 
     @Override

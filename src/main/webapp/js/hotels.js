@@ -13,6 +13,7 @@ function jsonToHtml() {
     if (jsonArray.length !== 0) {
         filter.show()
     } else {
+        filter.hide()
         jQuery('<h5>', {
             class: 'text-muted',
             text: 'Результаты не найдены',
@@ -105,10 +106,27 @@ function jsonToHtml() {
                 method: 'POST',
                 success: function (jsonCommentsArray) {
 
+                    $('div[id^="modal-card-"]').remove()
+
+                    $('#modal-add-comment-button').click(function () {
+                        $.ajax({
+                            url: 'reviews/hotel/add',
+                            method: 'POST',
+                            data: {
+                                'hotel_id': jsonArray[i].id,
+                                'text': $('#modal-add-comment').val()
+                            },
+                            success: function () {
+                                $('#hotel-modal').modal('hide')
+                            },
+                        })
+                    })
+
                     for (let j in jsonCommentsArray) {
 
                         let modalCard = jQuery('<div>', {
-                            class: 'card mb-4'
+                            class: 'card mb-4',
+                            id: 'modal-card-' + i
                         }).appendTo($('#modal-body'))
 
                         let modalCardBody = jQuery('<div>', {
@@ -129,7 +147,7 @@ function jsonToHtml() {
                         }).appendTo(commentContainer1)
 
                         jQuery('<img>', {
-                            src: jsonCommentsArray[i].avatar,
+                            src: jsonCommentsArray[j].avatar,
                             class: 'rounded-circle',
                             alt: 'avatar',
                             width: '25',
@@ -140,28 +158,13 @@ function jsonToHtml() {
                         jQuery('<p>', {
                             id: 'modal-comment-name-' + j,
                             class: 'small mb-0 ms-2',
-                            text: jsonCommentsArray[i].name
+                            text: jsonCommentsArray[j].name
                         }).appendTo(commentContainer2)
 
 
                         $('#modal-comment-image-' + j).attr('src', jsonCommentsArray[j].image)
                         $('#modal-comment-text-' + j).html(jsonCommentsArray[j].text)
                         $('#modal-comment-name-' + j).html(jsonCommentsArray[j].name)
-
-                        $(document).on('click', '#modal-add-comment-button', function () {
-                            $.ajax({
-                                url: 'reviews/hotel/add',
-                                method: 'POST',
-                                data: {
-                                    'hotel_id': jsonArray[i].id,
-                                    'text': $('#modal-add-comment').val()
-                                },
-                                dataType: 'json',
-                                success: function () {
-                                    $('#hotel-modal').modal('hide')
-                                }
-                            })
-                        })
 
                     }
                 }

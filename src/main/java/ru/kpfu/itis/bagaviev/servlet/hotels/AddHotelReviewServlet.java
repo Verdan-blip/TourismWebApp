@@ -16,6 +16,10 @@ public class AddHotelReviewServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        resp.setContentType("text/plain");
+        resp.setCharacterEncoding("UTF-8");
+
         Integer userId = (Integer) req.getSession().getAttribute("userId");
         Integer hotelId = Integer.parseInt(req.getParameter("hotel_id"));
         String text = req.getParameter("text");

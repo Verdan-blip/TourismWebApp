@@ -47,7 +47,7 @@
                     </div>
                     <div class="card-body">
                         <h6 class="mb-4">${list_user.name}</h6>
-                        <h6 class="card-subtitle mb-2 text-muted">${list_user.lastname}</h6>
+                        <a class="text-decoration-none" href="/profile/user?id=${list_user.id}">Открыть профиль</a>
                     </div>
                 </div>
             </div>

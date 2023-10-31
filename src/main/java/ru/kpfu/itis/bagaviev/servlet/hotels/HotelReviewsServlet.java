@@ -23,8 +23,10 @@ public class HotelReviewsServlet extends HttpServlet {
         resp.setContentType("text/plain");
         resp.setCharacterEncoding("UTF-8");
 
+        Integer hotelId = Integer.parseInt(req.getParameter("hotel_id"));
+
         HotelReviewService hotelReviewService = new HotelReviewService();
-        List<HotelReviewsDto> hotelReviewsDtoList = hotelReviewService.getAll();
+        List<HotelReviewsDto> hotelReviewsDtoList = hotelReviewService.getAllReviews(hotelId);
         JSONArray jsonArray = new JSONArray();
         for (HotelReviewsDto hotelReviewsDto : hotelReviewsDtoList) {
             jsonArray.add(new JSONObject(

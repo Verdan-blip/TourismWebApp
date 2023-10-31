@@ -1,7 +1,6 @@
 package ru.kpfu.itis.bagaviev.filters;
 
 import ru.kpfu.itis.bagaviev.dto.UserDto;
-import ru.kpfu.itis.bagaviev.model.User;
 import ru.kpfu.itis.bagaviev.service.UserService;
 
 import javax.servlet.*;
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "authorizationFilter", urlPatterns = {"/profile", "/reviews", "/hotels"})
+@WebFilter(filterName = "authorizationFilter", urlPatterns = {"/profile", "/reviews", "/hotels", "/friends"})
 public class AuthorizationFilter implements Filter {
 
     private final String COOKIE_NAME_FOR_AUTHORIZATION = "userId";
@@ -42,6 +41,8 @@ public class AuthorizationFilter implements Filter {
                 session.setAttribute("userId", userDto.getId());
                 filterChain.doFilter(servletRequest, servletResponse);
             }
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 

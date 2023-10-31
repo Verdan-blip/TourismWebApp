@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </head>
 <body>
+
     <@navbars.navbars user></@navbars.navbars>
 
     <!-- Modal -->
@@ -55,8 +56,8 @@
             <label for="filter-by-price" style="margin: 8px 8px;">Фильтровать по</label>
             <select id="filter-by-price" class="form-select">
                 <option disabled selected>Выберите</option>
-                <option value="by-ascending">По возрастанию</option>
-                <option value="by-descending">По убыванию</option>
+                <option value="by-ascending">По возрастанию цены</option>
+                <option value="by-descending">По убыванию цены</option>
                 <option value="by-rating">По рейтингу</option>
             </select>
         </div>
